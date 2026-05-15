@@ -1,24 +1,6 @@
 <?php
 declare(strict_types=1);
 
-/*
-|--------------------------------------------------------------------------
-| INDEX.PHP - db_gege LOCAL UPLOAD + IMAGE POPUP EDIT
-|--------------------------------------------------------------------------
-| Versi ini tidak memakai Imgur API.
-| Upload gambar masuk ke folder lokal: uploads/
-|
-| Fitur utama:
-| - Upload gambar lokal
-| - Card gambar lebih besar
-| - Menu gambar ada di atas card
-| - Judul gambar di bawah foto
-| - Klik foto/card membuka popup transparan di tengah layar
-| - Popup berisi preview besar, Copy Link, Edit Judul, Edit Link
-| - Sticky Notes tetap ada
-|--------------------------------------------------------------------------
-*/
-
 date_default_timezone_set('Asia/Phnom_Penh');
 
 /* =========================
@@ -268,6 +250,8 @@ if ($api !== '') {
 
                 json_response([
                     'success' => true,
+                    'message' => 'Link gambar berhasil tersimpan ke database.',
+                    'saved_to_database' => true,
                     'id' => db()->lastInsertId(),
                     'link' => $link,
                 ]);
@@ -348,10 +332,12 @@ if ($api !== '') {
 
                 json_response([
                     'success' => true,
-                    'message' => 'Gambar berhasil diupload ke folder lokal.',
+                    'message' => 'Gambar berhasil diupload dan otomatis tersimpan ke database.',
+                    'saved_to_database' => true,
                     'id' => db()->lastInsertId(),
                     'data' => [
                         'link' => $relativeLink,
+                        'page_link' => $relativeLink,
                         'filename' => $newName,
                         'mime' => $mime,
                     ],
@@ -2389,7 +2375,7 @@ if ($api !== '') {
                 isNewFavorite = false;
                 newFavorite.classList.add('off');
 
-                showToast('Link gambar berhasil disimpan.');
+                showToast('Link gambar berhasil tersimpan ke database.');
                 showGallery();
             } catch (error) {
                 showToast(error.message);
@@ -2433,7 +2419,7 @@ if ($api !== '') {
                 linkInput.value = json.data.link;
                 fileInput.value = '';
 
-                showToast('Upload berhasil. Foto langsung tampil.');
+                showToast('Upload berhasil dan sudah tersimpan ke database.');
                 showGallery();
             } catch (error) {
                 showToast(error.message);
