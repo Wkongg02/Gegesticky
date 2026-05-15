@@ -585,7 +585,7 @@ if ($api !== '') {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>db_gege - Gallery Popup Edit</title>
+    <title>Data Lc gege cantik</title>
 
     <style>
         :root {
